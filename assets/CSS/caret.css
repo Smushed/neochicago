@@ -1,0 +1,30 @@
+.caretjs {
+    display: inline-block;
+    font-family: monospace;
+}
+
+.caretjs + span {
+    font-family: monospace;
+    background: transparent;
+    position: relative;
+    right: 0;
+    margin: 0;
+}
+
+.caretjs + span > span {
+    color: #03A062;
+    animation: blink-animation 1.5s steps(5, start) infinite;
+    -webkit-animation: blink-animation 1.5s steps(5, start) infinite;
+}
+
+/* Animations */
+@keyframes blink-animation {
+to {
+    visibility: hidden;
+}
+}
+@-webkit-keyframes blink-animation {
+to {
+    visibility: hidden;
+}
+}
