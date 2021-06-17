@@ -28,6 +28,10 @@ textarea {
     height: 100vh;
 }
 
+.topZIndex {
+    z-index: 100;
+}
+
 /* Home Page */
 .flexCenter {
     display: flex;
@@ -83,7 +87,11 @@ textarea {
     font-family: Iceland, Arial, Helvetica, sans-serif;
 }
 
-
+/* Matrix Rain */
+.matrixRain {
+    position: absolute;
+    z-index: 0.5;
+}
 
 
 /* Fonts */
