@@ -1,0 +1,94 @@
+body {
+    font-family: Iceland, Arial, Helvetica, sans-serif;
+    cursor: url('../Images/MatrixCur.cur'), auto;
+    overflow-x: hidden;
+}
+
+body,html {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    margin: 0;
+    padding: 10px;
+}
+
+textarea {
+    font-family: Iceland, Arial, Helvetica, sans-serif;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+}
+
+/* Home Page */
+.flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.headerContainer {
+    height: 35%;
+}
+
+/* Input Styling */
+.matrixInput {
+    margin-top: 15px;
+    border-radius: 1px;
+    font-family: Iceland, Arial, Helvetica, sans-serif;
+    color: #03A062;
+    background-color: black;
+    border: 1px solid #03A062;
+    font-size: 30px;
+    cursor: url('../Images/TextCursor.cur'), auto;
+}
+
+.matrixInput:focus {
+    outline-color: #03A062;
+}
+
+.matrixButton {
+    margin-top: 15px;
+    border-radius: 1px;
+    color: #03A062;
+    background-color: black;
+    border: 1px solid #03A062;
+    font-family: Iceland, Arial, Helvetica, sans-serif;
+    font-size: 35px;
+    cursor: url('../Images/MatrixPointer.cur'), auto;
+}
+
+.matrixButton:hover {
+    color: #000;
+    background-color: #03A062;
+    border: 1px solid #000;
+}
+
+/* Message page */
+.messageLog {
+    height: 50%;
+    background-color: red;
+}
+
+.message {
+    font-size: 20px;
+    font-family: Iceland, Arial, Helvetica, sans-serif;
+}
+
+
+
+
+/* Fonts */
+/* 
+font-family: 'Iceland', cursive;
+font-family: 'Libre Barcode 39 Text', cursive;
+font-family: 'Major Mono Display', monospace; 
+*/
