@@ -1,0 +1,134 @@
+h1.glitch {
+    color: white;
+    font-family: Iceland, Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    position: relative;
+    font-size: 175px;
+    padding: 0;
+}
+
+h1.glitch::before, .h1.glitch::after {
+    padding: 0;
+    color: white;
+    content: "Kairos";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    overflow: hidden;
+    top: 0;
+
+}
+
+h1.glitch::before {
+    left: 3px;
+    text-shadow: -2px 0 red;
+    animation-name: glitch-animation-1;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-direction: reverse-alternate; 
+}
+
+h1.glitch::after {
+    left: -3px;
+    text-shadow: -2px 0 blue;
+    animation-name: glitch-animation-2;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-direction: reverse-alternate; 
+}
+  
+@keyframes glitch-animation-1 {
+    0% {
+      clip: rect(18px, 450px, 55px, 0); }
+    5% {
+      clip: rect(80px, 450px, 85px, 0); }
+    10% {
+      clip: rect(112px, 450px, 90px, 0); }
+    15% {
+      clip: rect(39px, 450px, 115px, 0); }
+    20% {
+      clip: rect(13px, 450px, 22px, 0); }
+    25% {
+      clip: rect(134px, 450px, 106px, 0); }
+    30% {
+      clip: rect(1px, 450px, 114px, 0); }
+    35% {
+      clip: rect(105px, 450px, 91px, 0); }
+    40% {
+      clip: rect(49px, 450px, 3px, 0); }
+    45% {
+      clip: rect(90px, 450px, 89px, 0); }
+    50% {
+      clip: rect(146px, 450px, 3px, 0); }
+    55% {
+      clip: rect(49px, 450px, 50px, 0); }
+    60% {
+      clip: rect(8px, 450px, 54px, 0); }
+    65% {
+      clip: rect(52px, 450px, 31px, 0); }
+    70% {
+      clip: rect(19px, 450px, 123px, 0); }
+    75% {
+      clip: rect(113px, 450px, 123px, 0); }
+    80% {
+      clip: rect(14px, 450px, 15px, 0); }
+    85% {
+      clip: rect(69px, 450px, 50px, 0); }
+    90% {
+      clip: rect(5px, 450px, 138px, 0); }
+    95% {
+      clip: rect(31px, 450px, 61px, 0); }
+    100% {
+      clip: rect(41px, 450px, 111px, 0); } 
+}
+  
+@keyframes glitch-animation-2 {
+    0% {
+      clip: rect(8px, 450px, 65px, 0); }
+    5% {
+      clip: rect(28px, 450px, 80px, 0); }
+    10% {
+      clip: rect(58px, 450px, 16px, 0); }
+    15% {
+      clip: rect(45px, 450px, 69px, 0); }
+    20% {
+      clip: rect(27px, 450px, 110px, 0); }
+    25% {
+      clip: rect(94px, 450px, 133px, 0); }
+    30% {
+      clip: rect(142px, 450px, 5px, 0); }
+    35% {
+      clip: rect(59px, 450px, 78px, 0); }
+    40% {
+      clip: rect(115px, 450px, 21px, 0); }
+    45% {
+      clip: rect(144px, 450px, 149px, 0); }
+    50% {
+      clip: rect(93px, 450px, 59px, 0); }
+    55% {
+      clip: rect(91px, 450px, 51px, 0); }
+    60% {
+      clip: rect(54px, 450px, 97px, 0); }
+    65% {
+      clip: rect(5px, 450px, 143px, 0); }
+    70% {
+      clip: rect(80px, 450px, 45px, 0); }
+    75% {
+      clip: rect(3px, 450px, 114px, 0); }
+    80% {
+      clip: rect(42px, 450px, 120px, 0); }
+    85% {
+      clip: rect(66px, 450px, 123px, 0); }
+    90% {
+      clip: rect(75px, 450px, 5px, 0); }
+    95% {
+      clip: rect(131px, 450px, 8px, 0); }
+    100% {
+      clip: rect(108px, 450px, 83px, 0); } 
+}
+  

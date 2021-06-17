@@ -12,8 +12,9 @@
 }
 
 .caretjs + span > span {
+    margin-left: 8px;
     color: #03A062;
-    animation: blink-animation 1.5s steps(5, start) infinite;
+    animation: blink-animation 1.2s steps(5, start) infinite;
     -webkit-animation: blink-animation 1.5s steps(5, start) infinite;
 }
 

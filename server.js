@@ -9,9 +9,10 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+app.use(express.static(path.join(__dirname, '/assets')));
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
-app.set('views', __dirname + '/views')
+app.set('views', __dirname + '/views');
 
 MONGODB_URI = process.env.MONGO_ATLUS;
 
@@ -23,8 +24,15 @@ try {
 
 require('./routes/htmlRoutes')(app);
 
-app.use(express.static(path.join(__dirname, '/assets')));
-
 app.listen(PORT, function () {
     console.log('Listening on port %s', PORT);
 });
+
+//DISCORD
+const Discord = require('discord.js');
+const client = new Discord.Client({ ws: { intents: new Discord.Intents(Discord.Intents.ALL) } });
+
+require('./discord/dLogin')(client);
+require('./discord/dMessages')(client)
+
+client.login(process.env.DISCORD_TOKEN);
