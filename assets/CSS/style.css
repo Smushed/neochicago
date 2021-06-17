@@ -28,14 +28,27 @@ textarea {
     height: 100vh;
 }
 
+/* Home Page */
+.flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.headerContainer {
+    height: 35%;
+}
+
 /* Input Styling */
 .matrixInput {
+    margin-top: 15px;
+    border-radius: 1px;
     font-family: Iceland, Arial, Helvetica, sans-serif;
     color: #03A062;
     background-color: black;
     border: 1px solid #03A062;
     font-size: 30px;
-    cursor: url('../Images/TextMatrix.cur'), auto;
+    cursor: url('../Images/TextCursor.cur'), auto;
 }
 
 .matrixInput:focus {
@@ -43,12 +56,20 @@ textarea {
 }
 
 .matrixButton {
+    margin-top: 15px;
+    border-radius: 1px;
     color: #03A062;
     background-color: black;
     border: 1px solid #03A062;
     font-family: Iceland, Arial, Helvetica, sans-serif;
     font-size: 35px;
     cursor: url('../Images/MatrixPointer.cur'), auto;
+}
+
+.matrixButton:hover {
+    color: #000;
+    background-color: #03A062;
+    border: 1px solid #000;
 }
 
 /* Message page */
