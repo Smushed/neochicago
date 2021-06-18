@@ -22,6 +22,7 @@ try {
     console.log(err);
 }
 
+require('./routes/apiRoutes')(app);
 require('./routes/htmlRoutes')(app);
 
 app.listen(PORT, function () {

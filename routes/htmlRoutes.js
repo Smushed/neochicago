@@ -1,5 +1,3 @@
-const messageHandler = require('../handlers/messageHandler');
-
 module.exports = function (app) {
     app.get('/', async (req, res) => {
         // const { erid: playerId, nid: npcId } = req.query;

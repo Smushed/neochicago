@@ -1,6 +1,19 @@
 $(document).ready(function () {
     $('#idInput').submit(function (e) {
-        console.log('btn clicked');
         e.preventDefault();
+        const erInput = $('#erIdInput').val();
+        console.log(erInput)
+        $.ajax({
+            url: '/api/login',
+            type: 'GET',
+            data: { id: erInput },
+            datatype: 'json',
+            success: function (res) {
+                console.log(res)
+            },
+            error: function () {
+                window.location.replace('/ACCESS_DENIED')
+            }
+        })
     })
 });

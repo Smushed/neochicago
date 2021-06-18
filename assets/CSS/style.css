@@ -2,6 +2,8 @@ body {
     font-family: Iceland, Arial, Helvetica, sans-serif;
     cursor: url('../Images/MatrixCur.cur'), auto;
     overflow-x: hidden;
+    font-family: Iceland, Arial, Helvetica, sans-serif;
+    color: #03A062;
 }
 
 body,html {
@@ -33,9 +35,24 @@ textarea {
 }
 
 /* Home Page */
+.fullHeight {
+    height: 100vh;
+}
+
 .flexCenter {
     display: flex;
     justify-content: center;
+}
+
+.alignCenter {
+    align-items: center;
+}
+
+.fourOhFourFont {
+    font-size: 36px;
+}
+
+.alignEnd {
     align-items: flex-end;
 }
 
@@ -53,6 +70,7 @@ textarea {
     border: 1px solid #03A062;
     font-size: 30px;
     cursor: url('../Images/TextCursor.cur'), auto;
+    width: 300px;
 }
 
 .matrixInput:focus {
@@ -93,6 +111,10 @@ textarea {
     z-index: 0.5;
 }
 
+/* 404 Styling */
+.fourOhFour {
+
+}
 
 /* Fonts */
 /* 
