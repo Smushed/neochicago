@@ -1,19 +1,19 @@
+const messageHandler = require('../handlers/messageHandler');
+
 module.exports = function (app) {
     app.get('/', async (req, res) => {
-        // const { erid: playerId, nid: npcId } = req.query;
-        // if (!playerId || !npcId) {
-        //     res.render('fourOFour');
-        //     return;
-        // };
-        // const messageLog = await messageHandler.grabMessages(playerId, npcId);
         res.render('home');
     });
 
-    app.get('/er/:playerId', (req, res) => {
-
+    app.get('/er/:discordId', async (req, res) => {
+        const { discordId } = req.params;
+        const convos = await messageHandler.grabConversations(discordId);
+        if (convos === false) { res.render('fourOFour') };
+        console.log(convos)
+        res.render('erHomepage', { convos });
     });
 
-    app.get('er/:playerId/n/:npcId', (req, res) => {
+    app.get('er/:playerId/ch/:npcId', (req, res) => {
 
     });
 

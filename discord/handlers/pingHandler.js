@@ -1,4 +1,5 @@
-const helpMessage = '*People who need help shouldn\'t be on the net* \n.link - Link to Kairos\n.id - get ID for Kairos \n.messages - Your Messages'
+const helpMessage = '*People who need help shouldn\'t be on the net.* \n.link - Link to Kairos Website\n.id - get ID for Kairos \n.messages - Your Messages';
+const unknownCommand = '*Be careful punching in random commands, you never know what\'s behind the next door.*\n.help for list of commands.';
 const Discord = require('discord.js');
 const db = require('../../models');
 const axios = require('axios');
@@ -25,6 +26,9 @@ module.exports = {
     linkWebsite: (message) => {
         const embedLink = createEmbed('Kairos Network', 'http://neochicago.network', 'NeoChicago\'s Edgerunner Hub');
         message.author.send('', embedLink)
+    },
+    unknownCommand: (message) => {
+        message.author.send(unknownCommand);
     },
     writeMessageToPC: async (client, sender, receiver, message) => {
         //Discord Info
@@ -53,7 +57,6 @@ module.exports = {
                 M: [dbRec._id, dbSend._id]
             });
         };
-        console.log(convo);
 
         //Date
         const timeJSON = await axios.get(`http://worldtimeapi.org/api/timezone/America/Chicago`);
@@ -66,21 +69,8 @@ module.exports = {
             C: convo._id
         })
 
-        disReceiver.send(`You have received a new message from ${dbSend.N}\nhttp://neochicago.network/er/${recId}/n/${dbSend._id}`);
+        disReceiver.send(`You have received a new message from ${dbSend.N}\nhttp://neochicago.network/er/${recId}/ch/${dbSend._id}`);
 
         return `Message has been sent to ${disReceiver.username}`;
     }
-}
-
-// S: { //Sender
-//     type: mongoose.Schema.Types.ObjectId,
-//     required: true,
-// },
-// R: {//Receiver
-//     type: mongoose.Schema.Types.ObjectId,
-//     required: true
-// },
-// M: String, //Message
-// D: Date, //Date Sent
-// O: Boolean, //Is Message that allows options (allows quick press yes or no or whatever other options)
-// OR: [String] //Option Response Array
+};

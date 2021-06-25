@@ -1,19 +1,5 @@
-
-const genericMessage =
-{
-    S: '123456',
-    R: '456789',
-    M: 'This is a message',
-    D: new Date('06/12/2021 16:20:00')
-}
-
-const sentMessage =
-{
-    S: '456789',
-    R: '123456',
-    M: 'Sent Message',
-    D: new Date('06/12/2021 16:20:00')
-}
+const db = require('../models');
+const moment = require('moment');
 
 module.exports = {
     grabMessages: async (playerId, npcId) => {
@@ -29,5 +15,29 @@ module.exports = {
     initMessages: () => {
         // db.User.create({})
         // db.Message
+    },
+    grabConversations: async (discordId) => {
+        const user = await db.User.findOne({ DID: discordId }).exec();
+        if (!user) {
+            return false;
+        };
+
+        const convos = await db.Conversation.find({ M: { '$in': [user._id] } });
+
+        const convosForDisplay = [];
+        for (let i = 0; i < convos.length; i++) {
+            const otherId = convos[i].M.filter(id => id.toString() !== user._id.toString());
+            const otherUser = await db.User.findById(otherId).exec();
+
+            const recentMessage = await db.Message.findOne({ C: convos[i]._id }).sort({ D: -1 });
+            convosForDisplay.push({
+                ER: user.N,
+                CH: otherUser.N,
+                RM: recentMessage.M,
+                D: moment(recentMessage.D).add(20, 'y').format('MM/DD/YY HH:MM')
+            });
+        }
+
+        return convosForDisplay;
     }
 }

@@ -25,7 +25,7 @@ module.exports = function (client) {
                     message.author.send(response);
                     break;
                 } default: {
-                    message.author.send('Unknown Command, Choomba')
+                    message.author.send('Unknown Command, Choomba');
                 }
             };
 
@@ -48,7 +48,9 @@ module.exports = function (client) {
             } case '.messages': {
                 pingHandler.messagePage(message);
                 break;
-            }
+            } default: {
+                pingHandler.unknownCommand(message);
+            };
         }
     });
 }
