@@ -22,22 +22,24 @@ module.exports = {
             return false;
         };
 
-        const convos = await db.Conversation.find({ M: { '$in': [user._id] } });
+        const userConvos = await db.Conversation.find({ M: { '$in': [user._id] } });
 
-        const convosForDisplay = [];
-        for (let i = 0; i < convos.length; i++) {
-            const otherId = convos[i].M.filter(id => id.toString() !== user._id.toString());
+        const convos = [];
+        for (let i = 0; i < userConvos.length; i++) {
+            const otherId = userConvos[i].M.filter(id => id.toString() !== user._id.toString());
             const otherUser = await db.User.findById(otherId).exec();
 
-            const recentMessage = await db.Message.findOne({ C: convos[i]._id }).sort({ D: -1 });
-            convosForDisplay.push({
+            const recentMessage = await db.Message.findOne({ C: userConvos[i]._id }).sort({ D: -1 });
+            convos.push({
                 ER: user.N,
+                ERID: discordId,
                 CH: otherUser.N,
+                CHID: otherUser._id,
                 RM: recentMessage.M,
                 D: moment(recentMessage.D).add(20, 'y').format('MM/DD/YY HH:MM')
             });
         }
 
-        return convosForDisplay;
+        return { convos, UN: user.N };
     }
 }

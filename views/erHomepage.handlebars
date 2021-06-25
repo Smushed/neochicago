@@ -1,14 +1,25 @@
-<div>Edgerunner Homepage</div>
-{{#each convos}}
-<div>{{this.ER}}</div>
-<div>{{this.CH}}</div>
-<div>{{this.RM}}</div>
-<div>{{this.D}}</div>
-{{/each}}
+<link rel='stylesheet' href='/CSS/glitchText.css'>
 
-{{!--
-ER: user.N,
-CH: otherUser.N,
-RM: recentMessage.M,
-D: recentMessage.D
---}}
+<video autoplay muted loop id='binaryBackground'>
+    <source src='/Images/binaryBackground.mp4' type='video/mp4'>
+</video>
+
+<div class='flexCenter erNameHeader alignEnd'>
+    <h1 class='glitch' data-text='{{UN}}'>{{UN}}</h1>
+</div>
+
+<div class='convoContainer'>
+    {{#each convos}}
+    <a href='/er/{{this.ERID}}/ch/{{this.CHID}}'>
+        <div class='convoBox'>
+            <div class='flexCenter'>
+                <div>{{this.CH}}</div>
+            </div>
+            <div class='recentMessage'>{{this.RM}}</div>
+            <div class='bottomLine'>
+                <div>{{this.D}}</div>
+            </div>
+        </div>
+    </a>
+    {{/each}}
+</div>

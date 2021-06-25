@@ -7,10 +7,9 @@ module.exports = function (app) {
 
     app.get('/er/:discordId', async (req, res) => {
         const { discordId } = req.params;
-        const convos = await messageHandler.grabConversations(discordId);
-        if (convos === false) { res.render('fourOFour') };
-        console.log(convos)
-        res.render('erHomepage', { convos });
+        const display = await messageHandler.grabConversations(discordId);
+        if (display === false) { res.render('fourOFour') };
+        res.render('erHomepage', display);
     });
 
     app.get('er/:playerId/ch/:npcId', (req, res) => {

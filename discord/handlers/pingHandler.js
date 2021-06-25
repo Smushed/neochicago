@@ -51,7 +51,7 @@ module.exports = {
         };
 
         //Conversation
-        let convo = await db.Conversation.findOne({ M: { '$in': [dbRec._id, dbSend._id] } });
+        let convo = await db.Conversation.findOne({ '$and': [{ M: { '$in': [dbSend._id] } }, { M: { '$in': [dbRec._id] } }] });
         if (!convo) {
             convo = await db.Conversation.create({
                 M: [dbRec._id, dbSend._id]
