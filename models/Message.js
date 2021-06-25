@@ -11,8 +11,9 @@ const MessageSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    M: String, //String
-    D: Date //Date Sent
+    M: String, //Message
+    D: Date, //Date Sent
+    C: mongoose.Schema.Types.ObjectId
 });
 
 module.exports = mongoose.model(`Message`, MessageSchema);
