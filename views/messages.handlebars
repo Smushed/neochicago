@@ -1,10 +1,25 @@
-<h1>Title</h1>
+<link rel='stylesheet' href='/CSS/glitchText.css'>
+
+<video autoplay muted loop id='binaryBackground'>
+    <source src='/Images/blueBackground.mp4' type='video/mp4'>
+</video>
+
+<div class='flexCenter erNameHeader alignEnd'>
+    <h1 class='glitch' data-text='Message with {{CHUN}}'>Message with {{CHUN}}</h1>
+</div>
+
 <div class='messageLog'>
     {{#each messageLog}}
     <div class='message'>{{this.M}}</div>
     {{/each}}
 </div>
-<input id='caret' class='caretjs' maxlength='15'>
 
-<script src='/JS/caret.js'></script>
-<script src='/JS/initCaret.js'></script>
+<div class='inputButtonContainer'>
+    <input name='messageSubmit' id='erIdInput' class='matrixInput topZIndex' maxlength='20'>
+    <div class='flexCenter'>
+        <button type='submit' class='matrixButton topZIndex'>Submit</button>
+    </div>
+    <div class='flexCenter'>
+        <button type='submit' class='matrixButton topZIndex'>Back to ER Home</button>
+    </div>
+</div>

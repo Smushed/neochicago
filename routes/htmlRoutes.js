@@ -12,8 +12,12 @@ module.exports = function (app) {
         res.render('erHomepage', display);
     });
 
-    app.get('er/:playerId/ch/:npcId', (req, res) => {
+    app.get('/er/:discordId/ch/:npcId', async (req, res) => {
+        const { discordId, npcId } = req.params;
+        const display = await messageHandler.grabMessages(discordId, npcId);
+        if (display === false) { res.render('fourOFour') };
 
+        res.render('messages', display);
     });
 
     app.get('/132149821728358401', (req, res) => {

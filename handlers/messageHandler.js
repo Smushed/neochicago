@@ -1,16 +1,26 @@
 const db = require('../models');
 const moment = require('moment');
 
+const findOrCreateConvo = async (id1, id2) => {
+    let convo = await db.Conversation.findOne({ '$and': [{ M: { '$in': [id1] } }, { M: { '$in': [id2] } }] });
+    if (!convo) {
+        convo = await db.Conversation.create({
+            M: [id1, id2]
+        });
+    };
+    return convo;
+};
+
 module.exports = {
-    grabMessages: async (playerId, npcId) => {
-        const messageLog = [];
-        for (let i = 0; i < 15; i++) {
-            // if (playerId === genericMessage.S)
-            messageLog.push(genericMessage)
-            messageLog.push(sentMessage)
-        };
-        return messageLog;
-        // const user = await db.User.findOne({ U: 'bullshit' });
+    grabMessages: async (discordId, npcId) => {
+        const user = await db.User.findOne({ DID: discordId }).exec();
+        if (!user) { return false };
+        const npc = await db.User.findById(npcId).exec();
+        if (!npc) { return false };
+
+        const convo = await findOrCreateConvo(user._id, npcId)
+        const messageLog = await db.Message.find({ C: convo._id }).lean();
+        return { messageLog, ERUN: user.N, CHUN: npc.N };
     },
     initMessages: () => {
         // db.User.create({})
@@ -18,9 +28,7 @@ module.exports = {
     },
     grabConversations: async (discordId) => {
         const user = await db.User.findOne({ DID: discordId }).exec();
-        if (!user) {
-            return false;
-        };
+        if (!user) { return false; };
 
         const userConvos = await db.Conversation.find({ M: { '$in': [user._id] } });
 
