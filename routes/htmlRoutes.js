@@ -1,4 +1,5 @@
 const messageHandler = require('../handlers/messageHandler');
+require('dotenv').config();
 
 module.exports = function (app) {
     app.get('/', async (req, res) => {
@@ -20,7 +21,7 @@ module.exports = function (app) {
         res.render('messages', display);
     });
 
-    app.get('/132149821728358401', (req, res) => {
+    app.get(`/${process.env.KEVIN}`, (req, res) => {
         console.log(`admin`);
         res.render('admin');
     });

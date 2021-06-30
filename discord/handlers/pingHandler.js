@@ -2,9 +2,31 @@ const Discord = require('discord.js');
 const db = require('../../models');
 const axios = require('axios');
 
-const helpMessage = 'Kairos Response -\n*People who need help shouldn\'t be on the net.* \n.link - Link to Kairos Website\n.id - get ID for Kairos \n.messages - Your Messages';
+const helpMessage = 'Kairos Response -\n*People who need help shouldn\'t be on the net.* \n.link - Link to Kairos Website\n.id - get ID for Kairos \n.messages - Your Messages\n.8 Consult Magic';
 const unknownCommand = '*Be careful punching in random commands, you never know what\'s behind the next door.*\n.help for Kairos commands.';
 const agentMessage = 'Reaching out to Kairos...';
+const eightBall = [
+    'It is certain',
+    'It is decidedly so',
+    'Without a doubt',
+    'Yes, definitely',
+    'You may rely on it',
+    'As I see it, yes',
+    'Most likely',
+    'Outlook good',
+    'Yes',
+    'Signs point to yes',
+    'Reply hazy try again',
+    'Ask again later',
+    'Better not tell you now',
+    'Cannot predict now',
+    'Concentrate and ask again',
+    'Don\'t count on it',
+    'My reply is no',
+    'My sources say no',
+    'Outlook not so good',
+    'Very doubtful'
+]
 
 const createEmbed = (title, url, description = '') => {
     return new Discord.MessageEmbed()
@@ -75,5 +97,9 @@ module.exports = {
         disReceiver.send(`You have a new message on Kairos from ${dbSend.N}\nhttp://neochicago.network/er/${recId}/ch/${dbSend._id}`);
 
         return `Message has been sent to ${disReceiver.username}`;
+    },
+    eightBall: (message) => {
+        message.reply(`Consulting the magic...\n- ${eightBall[Math.floor(Math.random() * 20)]}`);
+        return;
     }
 };

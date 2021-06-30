@@ -51,6 +51,9 @@ module.exports = function (client) {
             } case '.messages': {
                 pingHandler.messagePage(message);
                 break;
+            } case '.8': {
+                pingHandler.eightBall(message);
+                break;
             } default: {
                 pingHandler.unknownCommand(message);
             };
