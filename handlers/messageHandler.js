@@ -1,5 +1,6 @@
 const db = require('../models');
 const moment = require('moment');
+const axios = require('axios');
 
 const findOrCreateConvo = async (id1, id2) => {
     let convo = await db.Conversation.findOne({ '$and': [{ M: { '$in': [id1] } }, { M: { '$in': [id2] } }] });
@@ -11,6 +12,23 @@ const findOrCreateConvo = async (id1, id2) => {
     return convo;
 };
 
+const pullMessages = (convoId) => {
+    return new Promise(async (res, rej) => {
+        res(await db.Message.find({ C: convoId }).sort({ D: 1 }).lean())
+    });
+};
+
+const fillMessageUsers = (messageLog, user) => {
+    const updatedLog = [];
+    for (let i = 0; i < messageLog.length; i++) {
+        updatedLog.push({
+            M: messageLog[i].M,
+            CU: (messageLog[i].S.toString() === user._id.toString() ? true : false)
+        });
+    };
+    return updatedLog;
+};
+
 module.exports = {
     grabMessages: async (discordId, npcId) => {
         const user = await db.User.findOne({ DID: discordId }).exec();
@@ -19,8 +37,9 @@ module.exports = {
         if (!npc) { return false };
 
         const convo = await findOrCreateConvo(user._id, npcId)
-        const messageLog = await db.Message.find({ C: convo._id }).lean();
-        return { messageLog, ERUN: user.N, CHUN: npc.N };
+        const rawMessageLog = await pullMessages(convo._id);
+        const messageLog = fillMessageUsers(rawMessageLog, user);
+        return { messageLog, ERUN: user.N, CHUN: npc.N, DID: discordId };
     },
     initMessages: () => {
         // db.User.create({})
@@ -49,5 +68,22 @@ module.exports = {
         }
 
         return { convos, UN: user.N };
+    },
+    erMessage: async (message, ERUN, CHUN) => {
+        const user = await db.User.findOne({ N: ERUN }).exec();
+        const npc = await db.User.findOne({ N: CHUN }).exec();
+
+        const convo = await findOrCreateConvo(user._id, npc._id);
+
+        const timeJSON = await axios.get(`http://worldtimeapi.org/api/timezone/America/Chicago`);
+        await db.Message.create({
+            S: user._id,
+            R: npc._id,
+            M: message,
+            D: timeJSON.data.datetime,
+            C: convo._id
+        });
+
+        return 200;
     }
 }

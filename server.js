@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const bodyParser = require('body-parser');
 
 const mongoose = require(`mongoose`);
 
@@ -13,6 +14,8 @@ app.use(express.static(path.join(__dirname, '/assets')));
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 MONGODB_URI = process.env.MONGO_ATLUS;
 

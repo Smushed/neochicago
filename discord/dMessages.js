@@ -13,7 +13,10 @@ module.exports = function (client) {
             };
 
             const [x, cmdName, arg1, arg2, arg3] = message.content.split('+');
-            if (!arg1) { return; };
+            if (!arg1) {
+                message.author.send('-\nacmd+cnpc+NPC_NAME  -Create NPC\nacmd+cmsg+NPC_SENDER_NAME+PC_REAL_NAME+MESSAGE  -Send Message');
+                return;
+            };
 
             switch (cmdName) {
                 case 'cnpc': {

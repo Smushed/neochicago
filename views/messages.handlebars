@@ -8,18 +8,31 @@
     <h1 class='glitch' data-text='Message with {{CHUN}}'>Message with {{CHUN}}</h1>
 </div>
 
-<div class='messageLog'>
+<div class='messageLog' id='messageLog'>
     {{#each messageLog}}
-    <div class='message'>{{this.M}}</div>
+    {{#if this.CU}}
+    <div class='pcMessage message'>{{this.M}}</div>
+    {{else}}
+    <div class='npcMessage message'>
+        <div class='messageName'>{{../CHUN}}</div>
+        {{this.M}}
+    </div>
+    {{/if}}
     {{/each}}
 </div>
 
 <div class='inputButtonContainer'>
-    <input name='messageSubmit' id='erIdInput' class='matrixInput topZIndex' maxlength='20'>
+    <input type='hidden' id='ERUN' value={{ERUN}}>
+    <input type='hidden' id='CHUN' value={{CHUN}}>
+    <textarea name='erMsg' id='erMsg' class='matrixInput topZIndex messageInput'></textarea>
     <div class='flexCenter'>
-        <button type='submit' class='matrixButton topZIndex'>Submit</button>
+        <button id='submitMessage' class='matrixButton topZIndex messageButton'>Submit</button>
     </div>
     <div class='flexCenter'>
-        <button type='submit' class='matrixButton topZIndex'>Back to ER Home</button>
+        <a href='/er/{{DID}}'>
+            <button class='matrixButton topZIndex messageButton'>Back to ER Home</button>
+        </a>
     </div>
 </div>
+
+<script src='/JS/message.js'></script>

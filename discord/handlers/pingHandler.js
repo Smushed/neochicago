@@ -1,8 +1,10 @@
-const helpMessage = '*People who need help shouldn\'t be on the net.* \n.link - Link to Kairos Website\n.id - get ID for Kairos \n.messages - Your Messages';
-const unknownCommand = '*Be careful punching in random commands, you never know what\'s behind the next door.*\n.help for list of commands.';
 const Discord = require('discord.js');
 const db = require('../../models');
 const axios = require('axios');
+
+const helpMessage = 'Kairos Response -\n*People who need help shouldn\'t be on the net.* \n.link - Link to Kairos Website\n.id - get ID for Kairos \n.messages - Your Messages';
+const unknownCommand = '*Be careful punching in random commands, you never know what\'s behind the next door.*\n.help for Kairos commands.';
+const agentMessage = 'Reaching out to Kairos...';
 
 const createEmbed = (title, url, description = '') => {
     return new Discord.MessageEmbed()
@@ -13,7 +15,8 @@ const createEmbed = (title, url, description = '') => {
 
 module.exports = {
     help: (message) => {
-        message.author.send(`${helpMessage}`);
+        message.author.send(agentMessage);
+        setTimeout(() => message.author.send(helpMessage), 1500);
     },
     replyId: (message) => {
         message.author.send(message.author.id);
@@ -21,7 +24,7 @@ module.exports = {
     messagePage: async (message) => {
         const user = await db.User.findOne({ DID: message.author.id });
         const embedLink = createEmbed(`${user.N} Message Hub`, `http://neochicago.network/er/${message.author.id}`);
-        message.author.send('Here you are, Edgerunner', embedLink)
+        message.author.send('Here you are Edgerunner', embedLink)
     },
     linkWebsite: (message) => {
         const embedLink = createEmbed('Kairos Network', 'http://neochicago.network', 'NeoChicago\'s Edgerunner Hub');
@@ -69,7 +72,7 @@ module.exports = {
             C: convo._id
         })
 
-        disReceiver.send(`You have received a new message from ${dbSend.N}\nhttp://neochicago.network/er/${recId}/ch/${dbSend._id}`);
+        disReceiver.send(`You have a new message on Kairos from ${dbSend.N}\nhttp://neochicago.network/er/${recId}/ch/${dbSend._id}`);
 
         return `Message has been sent to ${disReceiver.username}`;
     }

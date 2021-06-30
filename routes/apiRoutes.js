@@ -1,9 +1,9 @@
-const loginHandler = require("../handlers/loginHandler");
+const messageHandler = require("../handlers/messageHandler");
 
 module.exports = function (app) {
-    app.get('/api/login', async (req, res) => {
-        const { id } = req.query;
-        const response = await loginHandler.loginRequest(id);
+    app.post('/message', async (req, res) => {
+        const { message, ERUN, CHUN } = req.body;
+        const response = await messageHandler.erMessage(message, ERUN, CHUN);
         res.sendStatus(response);
-    })
+    });
 }
