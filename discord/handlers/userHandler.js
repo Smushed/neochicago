@@ -24,7 +24,7 @@ module.exports = {
         let response = 'All Users\n';
         for (const user of allUsers) {
             if (user.N !== 'Smushed') {
-                response += `\n${user.N} - localhost:3000/${process.env.BIG_ADMIN}/${user._id}`;
+                response += `\n${user.N} - ${process.env.URL}/${process.env.BIG_ADMIN}/${user._id}`;
             }
         }
         return response;
