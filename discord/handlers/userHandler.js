@@ -1,13 +1,5 @@
 const db = require('../../models');
 
-const createEmbed = (title, url, description = '') => {
-    return new Discord.MessageEmbed()
-        .setTitle(title)
-        .setURL(url)
-        .setDescription(description);
-};
-
-
 module.exports = {
     createNPC: async (name) => {
         const isDupe = await db.User.findOne({ N: name }).exec();
