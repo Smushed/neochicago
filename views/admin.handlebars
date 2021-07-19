@@ -1,1 +1,21 @@
-<h1>Login</h1>
+<div class='adminPanel flexCenter'>
+    {{#each players}}
+    <a href='/carmack/{{this._id}}'>
+        <div class='convoBox smallBox'>
+            <div class='flexCenter'>
+                <div>{{this.N}}</div>
+            </div>
+        </div>
+    </a>
+    {{/each}}
+    <div class='newFlexLine spacer'></div>
+    {{#each NPCs}}
+    <a href='/carmack/{{this._id}}'>
+        <div class='convoBox smallBox'>
+            <div class='flexCenter'>
+                <div>{{this.N}}</div>
+            </div>
+        </div>
+    </a>
+    {{/each}}
+</div>

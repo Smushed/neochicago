@@ -10,16 +10,20 @@
 
 <div class='convoContainer'>
     {{#each convos}}
-    <a href='/er/{{this.ERID}}/ch/{{this.CHID}}'>
-        <div class='convoBox'>
-            <div class='flexCenter'>
-                <div>{{this.CH}}</div>
+    {{#if ../A}}
+    <a href='/carmack/{{this.ERID}}/{{this.CHID}}'>
+        {{else}}
+        <a href='/er/{{this.ERID}}/ch/{{this.CHID}}'>
+            {{/if}}
+            <div class='convoBox'>
+                <div class='flexCenter'>
+                    <div>{{this.CH}}</div>
+                </div>
+                <div class='recentMessage'>{{this.RM}}</div>
+                <div class='bottomLine'>
+                    <div>{{this.D}}</div>
+                </div>
             </div>
-            <div class='recentMessage'>{{this.RM}}</div>
-            <div class='bottomLine'>
-                <div>{{this.D}}</div>
-            </div>
-        </div>
-    </a>
-    {{/each}}
+        </a>
+        {{/each}}
 </div>

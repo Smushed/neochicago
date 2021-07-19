@@ -1,6 +1,5 @@
 require("dotenv").config();
-const guildHandler = require('./handlers/guildHandler');
-const npcHandler = require('./handlers/npcHandler');
+const userHandler = require('./handlers/userHandler');
 const pingHandler = require('./handlers/pingHandler');
 
 module.exports = function (client) {
@@ -14,17 +13,21 @@ module.exports = function (client) {
 
             const [x, cmdName, arg1, arg2, arg3] = message.content.split('+');
             if (!arg1) {
-                message.author.send('-\nacmd+cnpc+NPC_NAME  -Create NPC\nacmd+cmsg+NPC_SENDER_NAME+PC_REAL_NAME+MESSAGE  -Send Message');
+                message.author.send('-\nacmd+cnpc+NPC_NAME  -Create NPC\nacmd+cmsg+NPC_SENDER_NAME+PC_REAL_NAME+MESSAGE  -Send Message\nacmd+link+PC_REAL_NAME  -Link to PC Admin Page\nacmd+lookup+all  -Lookup Characters');
                 return;
             };
 
             switch (cmdName) {
                 case 'cnpc': {
-                    const response = await npcHandler.createNPC(arg1); //arg1 should be name of NPC
+                    const response = await userHandler.createNPC(arg1); //arg1 should be name of NPC
                     message.author.send(response);
                     break;
                 } case 'cmsg': {
                     const response = await pingHandler.writeMessageToPC(client, arg1, arg2, arg3);
+                    message.author.send(response);
+                    break;
+                } case 'lookup': {
+                    const response = await userHandler.grabUsers();
                     message.author.send(response);
                     break;
                 } default: {
@@ -32,8 +35,6 @@ module.exports = function (client) {
                 }
             };
 
-            // pingHandler.pingRyan(client);
-            // guildHandler.saveUsers()
         };
 
         if (!message.content.startsWith('.')) { return }

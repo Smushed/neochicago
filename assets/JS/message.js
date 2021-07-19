@@ -2,6 +2,7 @@ $(document).ready(function () {
     $('#erMsg').keypress(function (e) {
         if (e.keyCode === 13 && !e.shiftKey) {
             submitMsg();
+            return;
         };
     });
 
@@ -21,7 +22,7 @@ $(document).ready(function () {
         };
 
         console.log({ msg, ERUN, CHUN });
-        const res = $.ajax('/message', {
+        $.ajax('/message', {
             type: 'POST',
             data: msg,
             statusCode: {

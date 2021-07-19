@@ -4,7 +4,7 @@
     <source src='/Images/blueBackground.mp4' type='video/mp4'>
 </video>
 
-<div class='flexCenter erNameHeader alignEnd'>
+<div class='flexCenter alignEnd'>
     <h1 class='glitch' data-text='Message with {{CHUN}}'>Message with {{CHUN}}</h1>
 </div>
 
@@ -25,13 +25,15 @@
     <input type='hidden' id='ERUN' value={{ERUN}}>
     <input type='hidden' id='CHUN' value={{CHUN}}>
     <textarea name='erMsg' id='erMsg' class='matrixInput topZIndex messageInput'></textarea>
-    <div class='flexCenter'>
-        <button id='submitMessage' class='matrixButton topZIndex messageButton'>Submit</button>
-    </div>
-    <div class='flexCenter'>
-        <a href='/er/{{DID}}'>
-            <button class='matrixButton topZIndex messageButton'>Back to ER Home</button>
-        </a>
+    <div class='smallOwnLine'>
+        <div class='flexCenter'>
+            <button id='submitMessage' class='matrixButton topZIndex messageButton'>Submit</button>
+        </div>
+        <div class='flexCenter'>
+            <a href='/er/{{DID}}'>
+                <button class='matrixButton topZIndex messageButton'>Home</button>
+            </a>
+        </div>
     </div>
 </div>
 

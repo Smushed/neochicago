@@ -47,6 +47,19 @@ textarea {
 .flexCenter {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+}
+
+.newFlexLine {
+    flex-basis: 100%;
+    height: 0;
+}
+
+.spacer {
+    height: 50px;
+    background-color: #03A062;
+    margin-bottom: 50px;
+    opacity: 0.2;
 }
 
 .alignCenter {
@@ -63,10 +76,6 @@ textarea {
 
 .headerContainer {
     height: 35%;
-}
-
-.erNameHeader {
-    height: 10%;
 }
 
 /* Input Styling */
@@ -121,10 +130,15 @@ textarea {
     margin-bottom: 40px;
     transition: all .2s ease-in-out;
     background-color: #05070A;
+    cursor: pointer;
 }
 
 .convoBox:hover {
     transform: scale(1.1);
+}
+
+.smallBox {
+    height: 50px;
 }
 
 .bottomLine {
@@ -146,7 +160,7 @@ textarea {
     right: 0;
     bottom: 0;
     min-width: 100%;
-    min-height: 100%;
+    min-height: 100vh;
     opacity: 20%;
   }
 
@@ -191,13 +205,13 @@ textarea {
 }
 
 .inputButtonContainer {
-    margin: 0 250px;
     display: flex;
+    justify-content: center;
 }
 
 .messageButton {
     height: 40px;
-    margin-top: 26px;
+    margin-top: 20px;
 }
 
 .messageInput {
@@ -205,10 +219,43 @@ textarea {
     margin-right: 25px;
 }
 
+.hidden {
+    display: none;
+}
+
 /* Matrix Rain */
 .matrixRain {
     position: absolute;
     z-index: 0.5;
+}
+
+@media only screen and (max-width: 1200px) {
+    .messageLog {
+      margin: 10px 0;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .messageLog {
+      margin: 10px 0;
+    }
+    .inputButtonContainer {
+        margin: 0;
+        margin-left: 10px;
+    }
+    .messageInput {
+        height: 125px;
+    }
+    .npcMessage {
+        margin-right: 50px;
+    }
+    .pcMessage {
+        margin-left: 50px;
+    }
+    .smallOwnLine {
+        flex-basis: 100%;
+        margin-bottom: 50px;
+    }
 }
 
 /* Fonts */

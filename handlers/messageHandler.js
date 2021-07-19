@@ -30,44 +30,11 @@ const fillMessageUsers = (messageLog, user) => {
 };
 
 module.exports = {
-    grabMessages: async (discordId, npcId) => {
-        const user = await db.User.findOne({ DID: discordId }).exec();
-        if (!user) { return false };
-        const npc = await db.User.findById(npcId).exec();
-        if (!npc) { return false };
-
-        const convo = await findOrCreateConvo(user._id, npcId)
+    grabMessages: async (user, npc) => {
+        const convo = await findOrCreateConvo(user._id, npc._id)
         const rawMessageLog = await pullMessages(convo._id);
-        const messageLog = fillMessageUsers(rawMessageLog, user);
-        return { messageLog, ERUN: user.N, CHUN: npc.N, DID: discordId };
-    },
-    initMessages: () => {
-        // db.User.create({})
-        // db.Message
-    },
-    grabConversations: async (discordId) => {
-        const user = await db.User.findOne({ DID: discordId }).exec();
-        if (!user) { return false; };
-
-        const userConvos = await db.Conversation.find({ M: { '$in': [user._id] } });
-
-        const convos = [];
-        for (let i = 0; i < userConvos.length; i++) {
-            const otherId = userConvos[i].M.filter(id => id.toString() !== user._id.toString());
-            const otherUser = await db.User.findById(otherId).exec();
-
-            const recentMessage = await db.Message.findOne({ C: userConvos[i]._id }).sort({ D: -1 });
-            convos.push({
-                ER: user.N,
-                ERID: discordId,
-                CH: otherUser.N,
-                CHID: otherUser._id,
-                RM: recentMessage.M,
-                D: moment(recentMessage.D).add(20, 'y').format('MM/DD/YY HH:MM')
-            });
-        }
-
-        return { convos, UN: user.N };
+        const messageLog = await fillMessageUsers(rawMessageLog, user);
+        return { messageLog, ERUN: user.N, CHUN: npc.N, DID: user.DID };
     },
     erMessage: async (message, ERUN, CHUN) => {
         const user = await db.User.findOne({ N: ERUN }).exec();
@@ -85,5 +52,28 @@ module.exports = {
         });
 
         return 200;
+    },
+    convoList: async (user) => {
+        const userConvos = await db.Conversation.find({ M: { '$in': [user._id] } });
+        const convos = [];
+        for (let i = 0; i < userConvos.length; i++) {
+            const otherId = userConvos[i].M.filter(id => id.toString() !== user._id.toString());
+            const otherUser = await db.User.findById(otherId).exec();
+
+            const recentMessage = await db.Message.findOne({ C: userConvos[i]._id }).sort({ D: -1 });
+            convos.push({
+                ER: user.N,
+                CH: otherUser.N,
+                CHID: otherUser._id,
+                RM: recentMessage.M,
+                D: moment(recentMessage.D).add(20, 'y').format('MM/DD/YY HH:MM')
+            });
+            if (user.DID) {
+                convos[i].ERID = user.DID;
+            } else {
+                convos[i].ERID = user._id;
+            }
+        }
+        return convos;
     }
 }
