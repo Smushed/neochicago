@@ -262,6 +262,9 @@ textarea {
     .convoBox {
         margin-left: 5%;
     }
+    .largeText {
+        font-size: 20px;
+    }
 }
 
 /* Fonts */

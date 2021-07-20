@@ -11,6 +11,12 @@
     font-size: 175px;
 }
 
+@media only screen and (max-width: 900px) {
+    .largeText {
+        font-size: 75px;
+    }
+}
+
 .glitch::before {
     content: attr(data-text);
     position: absolute;
