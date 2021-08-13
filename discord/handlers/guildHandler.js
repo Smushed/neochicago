@@ -9,9 +9,6 @@ module.exports = {
         const members = await guild.members.fetch();
         members.forEach(member => console.log(member.user.username, member.user.id));
     },
-    writeUsersToDB: async (client) => {
-
-    },
     saveUsers: () => {
         //This is to just init the new database. Don't use this unless the data is lost for some reason
         const users = ['98923028083138560', '106626827644059648', '132149821728358401', '349349897256042496', '528616089257771019'];
