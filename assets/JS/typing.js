@@ -1,7 +1,8 @@
 let captionLength = 0;
 let caption = '';
 let currentIteration = 0;
-const text = ['Nice Try...', null, 'Don\'t worry, we\'ll find you.', null, 'This is the end, my friend. Might as well enjoy it while it lasts.'];
+const text = ['Nice Try...', null, 'Don\'t worry, we\'ll find you.', null, 'This is the end my friend, might as well enjoy.'];
+
 
 $(document).ready(function () {
     setInterval('cursorAnimation()', 600);
@@ -12,8 +13,16 @@ $(document).ready(function () {
     setTimeout(() => declareTimeout(), 2000);
 });
 
+function cursorAnimation() {
+    $('#cursor').animate({
+        opacity: 0
+    }, 'fast', 'swing').animate({
+        opacity: 1
+    }, 'fast', 'swing');
+}
+
 function declareTimeout() {
-    if (currentIteration === 4) { return };
+    if (currentIteration === 2) { return };
     currentIteration++;
     if (currentIteration % 2 === 0) {
         typingEffect(currentIteration);
@@ -30,7 +39,8 @@ function typingEffect(i) {
 }
 
 function type() {
-    captionEl.html(caption.substr(0, captionLength++));
+    captionLength++;
+    captionEl.html(caption.substr(0, captionLength));
     if (captionLength < caption.length + 1) {
         setTimeout('type()', 50);
     } else {
@@ -53,12 +63,4 @@ function erase() {
         captionLength = 0;
         caption = '';
     }
-}
-
-function cursorAnimation() {
-    $('#cursor').animate({
-        opacity: 0
-    }, 'fast', 'swing').animate({
-        opacity: 1
-    }, 'fast', 'swing');
 }
