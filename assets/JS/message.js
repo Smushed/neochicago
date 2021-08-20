@@ -21,7 +21,6 @@ $(document).ready(function () {
             CHUN: $('#CHUN').val()
         };
 
-        console.log({ msg, ERUN, CHUN });
         $.ajax('/message', {
             type: 'POST',
             data: msg,
