@@ -23,7 +23,7 @@ module.exports = function (client) {
                     message.author.send(response);
                     break;
                 } case 'cmsg': {
-                    const response = await pingHandler.writeMessageToPC(client, arg1, arg2, arg3);
+                    const response = await pingHandler.writeMessageToPCFromCMD(client, arg1, arg2, arg3);
                     message.author.send(response);
                     break;
                 } case 'lookup': {

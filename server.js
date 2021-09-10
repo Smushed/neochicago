@@ -25,18 +25,18 @@ try {
     console.log(err);
 }
 
-require('./routes/apiRoutes')(app);
-require('./routes/htmlRoutes')(app);
-
-app.listen(PORT, function () {
-    console.log('Listening on port %s', PORT);
-});
-
 //DISCORD
 const Discord = require('discord.js');
 const client = new Discord.Client({ ws: { intents: new Discord.Intents(Discord.Intents.ALL) } });
 
 require('./discord/dLogin')(client);
-require('./discord/dMessages')(client)
+require('./discord/dMessages')(client);
 
 client.login(process.env.DISCORD_TOKEN);
+
+require('./routes/apiRoutes')(app, client);
+require('./routes/htmlRoutes')(app);
+
+app.listen(PORT, function () {
+    console.log('Listening on port %s', PORT);
+});

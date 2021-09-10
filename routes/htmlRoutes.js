@@ -1,4 +1,3 @@
-const messageHandler = require('../handlers/messageHandler');
 const characterHandler = require('../handlers/characterHandler');
 require('dotenv').config();
 
@@ -33,9 +32,10 @@ module.exports = function (app) {
         res.render('erHomepage', display);
     });
 
-    app.get(`/${process.env.BIG_ADMIN}/:NPCId/:ERId`, async (req, res) => {
-        const { NPCId, ERId } = req.params;
-        const display = await characterHandler.grabMessagesByMongo(NPCId, ERId);
+    app.get(`/${process.env.BIG_ADMIN}/:ERId/:NPCId`, async (req, res) => {
+        const { ERId, NPCId } = req.params;
+        let disReceiver = await client.users.fetch(ERId);
+        const display = await characterHandler.grabMessagesForAdmin(ERId, NPCId);
         res.render('messages', display);
     });
 

@@ -30,7 +30,7 @@ const fillMessageUsers = (messageLog, user) => {
 };
 
 module.exports = {
-    grabMessages: async (user, npc) => {
+    grabMessages: async (user, npc) => { //user and NPC might be flipped if an admin is using the carmack route
         const convo = await findOrCreateConvo(user._id, npc._id)
         const rawMessageLog = await pullMessages(convo._id);
         const messageLog = await fillMessageUsers(rawMessageLog, user);

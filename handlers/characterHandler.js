@@ -7,12 +7,10 @@ module.exports = {
         const players = [];
         const NPCs = [];
         for (const user of allUsers) {
-            if (user.N !== 'Smushed') {
-                if (user.P) {
-                    players.push(user.toJSON());
-                } else {
-                    NPCs.push(user.toJSON());
-                }
+            if (user.P) {
+                players.push(user.toJSON());
+            } else {
+                NPCs.push(user.toJSON());
             }
         }
         return { players, NPCs };
@@ -33,8 +31,8 @@ module.exports = {
 
         return { convos, UN: user.N, A: false };
     },
-    grabMessagesByMongo: async function (npcId, userId) {
-        const user = await db.User.findById(userId).exec();
+    grabMessagesForAdmin: async function (discordId, npcId) {
+        const user = await db.User.findOne({ DID: discordId }).exec();
         if (!user) { return false };
         const npc = await db.User.findById(npcId).exec();
         if (!npc) { return false };

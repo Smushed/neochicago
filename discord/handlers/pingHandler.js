@@ -55,7 +55,10 @@ module.exports = {
     unknownCommand: (message) => {
         message.author.send(unknownCommand);
     },
-    writeMessageToPC: async (client, sender, receiver, message) => {
+    writeMessageToPC: () => {
+
+    },
+    writeMessageToPCFromCMD: async (client, sender, receiver, message) => {
         //Discord Info
         const recId = process.env[receiver.toUpperCase()];
         let disReceiver;
