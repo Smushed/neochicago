@@ -26,6 +26,7 @@ $(document).ready(function () {
             data: msg,
             statusCode: {
                 200: function () {
+                    console.log('what the hell')
                     location.reload();
                     console.log('success');
                 },

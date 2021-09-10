@@ -34,7 +34,6 @@ module.exports = function (app) {
 
     app.get(`/${process.env.BIG_ADMIN}/:ERId/:NPCId`, async (req, res) => {
         const { ERId, NPCId } = req.params;
-        let disReceiver = await client.users.fetch(ERId);
         const display = await characterHandler.grabMessagesForAdmin(ERId, NPCId);
         res.render('messages', display);
     });

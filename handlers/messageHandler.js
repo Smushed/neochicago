@@ -39,15 +39,16 @@ module.exports = {
     erMessage: async (message, ERUN, CHUN) => {
         const user = await db.User.findOne({ N: ERUN }).exec();
         const npc = await db.User.findOne({ N: CHUN }).exec();
+        console.log({ user, npc })
 
         const convo = await findOrCreateConvo(user._id, npc._id);
 
-        const timeJSON = await axios.get(`http://worldtimeapi.org/api/timezone/America/Chicago`);
+        const newDate = new Date();
         await db.Message.create({
             S: user._id,
             R: npc._id,
             M: message,
-            D: timeJSON.data.datetime,
+            D: newDate,
             C: convo._id
         });
 

@@ -7,5 +7,4 @@ module.exports = function (app, client) {
         res.sendStatus(response);
     });
 
-    //FIGURE OUT HOW TO MESSAGE PEOPLE BETTER
 }
