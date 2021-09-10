@@ -106,7 +106,7 @@ module.exports = {
             C: convo._id
         })
 
-        disReceiver.send(`You have a new message on Kairos from ${dbSend.N}\nhttp://neochicago.network/er/${recId}/ch/${dbSend._id}`);
+        disReceiver.send(`You have a new message on Kairos from ${dbSend.N}\n - ${message}\n\nhttp://neochicago.network/er/${recId}/ch/${dbSend._id}`);
 
         return `Message has been sent to ${disReceiver.username}`;
     },
