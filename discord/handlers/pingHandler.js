@@ -90,7 +90,7 @@ module.exports = {
 
         //Conversation
 
-        let convo = getConversation(dbSend._id, dbRec._id);
+        let convo = await getConversation(dbSend._id, dbRec._id);
         if (!convo) {
             convo = await db.Conversation.create({
                 M: [dbRec._id, dbSend._id]
