@@ -1,6 +1,6 @@
+require('dotenv').config();
 const db = require('../models');
 const moment = require('moment');
-const axios = require('axios');
 
 const findOrCreateConvo = async (id1, id2) => {
     let convo = await db.Conversation.findOne({ '$and': [{ M: { '$in': [id1] } }, { M: { '$in': [id2] } }] });
@@ -36,10 +36,9 @@ module.exports = {
         const messageLog = await fillMessageUsers(rawMessageLog, user);
         return { messageLog, ERUN: user.N, CHUN: npc.N, DID: user.DID };
     },
-    erMessage: async (message, ERUN, CHUN) => {
+    erMessage: async (message, ERUN, CHUN, client) => {
         const user = await db.User.findOne({ N: ERUN }).exec();
         const npc = await db.User.findOne({ N: CHUN }).exec();
-        console.log({ user, npc })
 
         const convo = await findOrCreateConvo(user._id, npc._id);
 
@@ -51,6 +50,16 @@ module.exports = {
             D: newDate,
             C: convo._id
         });
+
+        if (user.P) {
+            let discord = await client.users.fetch(process.env.KEVIN);
+            discord.send(`User ${user.N} sent ${npc.N} a new message\n\nhttp://neochicago.network/carmack/${user.DID}/${npc._id}`);
+        } else {
+            //A bit confusing here, but this is if admin sent a message
+            //NPC is the player in the game and User is the character that sent the message
+            let discord = await client.users.fetch(npc.DID);
+            discord.send(`You've received a message from ${user.N}\n - ${message}\n\nhttp://neochicago.network/er/${npc.DID}/ch/${user._id}\n.reply [Your Message]   - Send a reply directly`);
+        }
 
         return 200;
     },

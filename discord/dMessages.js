@@ -1,4 +1,4 @@
-require("dotenv").config();
+require('dotenv').config();
 const userHandler = require('./handlers/userHandler');
 const pingHandler = require('./handlers/pingHandler');
 
@@ -38,8 +38,8 @@ module.exports = function (client) {
         };
 
         if (!message.content.startsWith('.')) { return }
-
-        switch (message.content) {
+        const [command] = message.content.split(' ');
+        switch (command) {
             case '.help': {
                 pingHandler.help(message);
                 break;
@@ -54,6 +54,12 @@ module.exports = function (client) {
                 break;
             } case '.8': {
                 pingHandler.eightBall(message);
+                break;
+            } case '.recent': {
+                pingHandler.getRecent(message);
+                break;
+            } case '.reply': {
+                pingHandler.replyToLast(message, client);
                 break;
             } default: {
                 pingHandler.unknownCommand(message);
