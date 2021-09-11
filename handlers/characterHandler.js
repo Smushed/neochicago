@@ -31,9 +31,11 @@ module.exports = {
 
         return { convos, UN: user.N, A: false };
     },
-    grabMessagesForAdmin: async function (discordId, npcId) {
-        const user = await db.User.findOne({ DID: discordId }).exec();
-        if (!user) { return false };
+    grabMessagesForAdmin: async function (pcId, npcId) {
+        let user = await db.User.findOne({ DID: pcId }).exec(); //If we are viewing from a perspective of a user then search by discordId, otherwise it's mongooseId
+        if (!user) {
+            user = await db.User.findById(pcId).exec();
+        };
         const npc = await db.User.findById(npcId).exec();
         if (!npc) { return false };
 
