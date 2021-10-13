@@ -13,7 +13,7 @@ module.exports = function (client) {
 
             const [x, cmdName, arg1, arg2, arg3] = message.content.split('+');
             if (!arg1) {
-                message.author.send('-\nacmd+cnpc+NPC_NAME  -Create NPC\nacmd+cmsg+NPC_SENDER_NAME+PC_REAL_NAME+MESSAGE  -Send Message\nacmd+lookup+all  -Lookup Characters');
+                message.author.send('-\nacmd+cnpc+NPC_NAME  -Create NPC\nacmd+cmsg+NPC_SENDER_NAME+PC_REAL_NAME+MESSAGE  -Send Message\nacmd+lookup+all  -Lookup Characters\nacmd+ping+PC_REAL_NAME');
                 return;
             };
 
@@ -28,6 +28,10 @@ module.exports = function (client) {
                     break;
                 } case 'lookup': {
                     const response = await userHandler.grabUsers();
+                    message.author.send(response);
+                    break;
+                } case 'ping': {
+                    const response = await pingHandler.sendAgentMessage(client, arg1, arg2);
                     message.author.send(response);
                     break;
                 } default: {

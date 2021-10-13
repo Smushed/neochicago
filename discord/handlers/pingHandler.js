@@ -149,5 +149,18 @@ module.exports = {
         admin.send(`User ${user.N} sent ${npc.N} a new message\n - ${reply}\n\nhttp://neochicago.network/carmack/${message.author.id}/${npc._id}`);
 
         return;
+    },
+    sendAgentMessage: async (client, receiver, message) => {
+        const recId = process.env[receiver.toUpperCase()];
+        let disReceiver;
+        try {
+            disReceiver = await client.users.fetch(recId);
+        } catch {
+            return 'Discord for Receiver is not found';
+        };
+
+        disReceiver.send(message);
+
+        return `Message sent to ${disReceiver.username}`;
     }
 };
